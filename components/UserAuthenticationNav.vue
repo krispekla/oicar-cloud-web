@@ -1,7 +1,7 @@
 <template>
   <div v-if="!isAuthenticated" class="auth-nav mr-4">
     <a href="/login">Login</a>
-    <a href="/register">Register</a>
+    <a href="/registration">Register</a>
   </div>
   <div v-else class="auth-nav mr-4">
     <a>Logout</a>

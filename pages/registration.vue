@@ -19,13 +19,17 @@
               required
             ></v-text-field>
 
-            <v-select
-              v-model="select"
-              :items="items"
-              :rules="[(v) => !!v || 'Item is required']"
-              label="Item"
-              required
-            ></v-select>
+            <v-text-field
+              v-model="password"
+              :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+              :rules="[rules.required, rules.min]"
+              :type="show ? 'text' : 'password'"
+              name="input-10-1"
+              label="Password"
+              hint="At least 8 characters"
+              counter
+              @click:append="show = !show"
+            ></v-text-field>
 
             <v-checkbox
               v-model="checkbox"
@@ -47,6 +51,8 @@
 <script>
 export default {
   data: () => ({
+    show: false,
+    password: '',
     valid: true,
     name: '',
     nameRules: [
@@ -58,8 +64,11 @@ export default {
       (v) => !!v || 'E-mail is required',
       (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid'
     ],
-    select: null,
-    items: ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
+    rules: {
+      required: (value) => !!value || 'Required.',
+      min: (v) => v.length >= 8 || 'Min 8 characters',
+      emailMatch: () => `"The·email·and·password·you·entered·don't·match"`
+    },
     checkbox: false,
     lazy: false
   }),
