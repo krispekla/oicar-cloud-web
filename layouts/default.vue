@@ -36,6 +36,7 @@
         </v-icon>
       </a>
       <v-toolbar-title class="mr-auto" v-text="title" />
+      <UserAuthenticationNav />
     </v-app-bar>
     <v-content>
       <v-container>
@@ -51,7 +52,9 @@
 </template>
 
 <script>
+import UserAuthenticationNav from '@/components/UserAuthenticationNav'
 export default {
+  components: { UserAuthenticationNav },
   data() {
     return {
       clipped: true,
