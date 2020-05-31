@@ -22,13 +22,9 @@ export const mutations = {
 
 export const actions = {
   login({ commit }, user) {
-    // this.$auth.$storage.setLocalStorage('token', user.token)
-    // this.$auth.$storage.setLocalStorage('email', user.email)
     commit('login', user)
   },
   logout({ commit }) {
-    // this.$auth.$storage.removeUniversal('token')
-    // this.$auth.$storage.removeUniversal('email')
     commit('logout')
   }
 }

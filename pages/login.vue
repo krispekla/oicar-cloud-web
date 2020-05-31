@@ -48,9 +48,6 @@ export default {
         password: this.password
       })
 
-      // eslint-disable-next-line no-console
-      console.log(result)
-
       if (result.status === 200) {
         this.$notify({
           group: 'foo',
@@ -60,7 +57,7 @@ export default {
         })
         this.$axios.setToken(result.data.token, 'Bearer')
         this.$store.dispatch('localStorage/login', result.data)
-        this.$router.push('/calculator')
+        this.$router.push('/')
       }
     }
   }

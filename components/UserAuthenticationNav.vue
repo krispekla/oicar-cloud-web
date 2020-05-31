@@ -19,6 +19,8 @@ export default {
   methods: {
     onLogout() {
       this.$store.dispatch('localStorage/logout')
+      this.$axios.setToken('', 'Bearer')
+      this.$router.push('/')
     }
   }
 }
