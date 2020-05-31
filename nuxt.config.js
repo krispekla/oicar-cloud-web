@@ -22,7 +22,11 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: {
+    color: '#5558d0',
+    height: '5px',
+    throttle: 0
+  },
   /*
    ** Global CSS
    */
@@ -30,7 +34,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [{ src: '~/plugins/vue-notifications', mode: 'client' }],
   /*
    ** Nuxt.js dev-modules
    */
@@ -46,13 +50,17 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    'nuxt-vuex-localstorage'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: 'http://localhost:5005/api',
+    withCredentials: true
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
@@ -60,6 +68,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,

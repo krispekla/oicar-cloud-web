@@ -4,7 +4,7 @@
     <a href="/registration">Register</a>
   </div>
   <div v-else class="auth-nav mr-4">
-    <a>Logout</a>
+    <a @click="onLogout">Logout</a>
   </div>
 </template>
 
@@ -13,7 +13,12 @@ export default {
   name: 'UserAuthenticationNav',
   computed: {
     isAuthenticated() {
-      return this.$store.getters.isAuthenticated
+      return this.$store.state.localStorage.isAuthenticated
+    }
+  },
+  methods: {
+    onLogout() {
+      this.$store.dispatch('localStorage/logout')
     }
   }
 }

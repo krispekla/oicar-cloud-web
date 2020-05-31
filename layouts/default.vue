@@ -1,5 +1,7 @@
 <template>
   <v-app dark>
+    <notifications group="foo" position="bottom right" />
+
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -80,11 +82,61 @@ export default {
       miniVariant: false,
       title: 'Oicar Cloud Calculator'
     }
+  },
+  created() {
+    // this.$axios.onResponse((response) => {
+    // function calculateType(response) {
+    //   switch (response.status) {
+    //     case 200:
+    //     case 201:
+    //     case 204:
+    //       return { type: 'success', title: 'Success' }
+    //     case 404:
+    //       return { type: 'warn', title: 'Warning', text: response.message }
+    //     default:
+    //       return { type: 'info', title: 'Info', text: response.message }
+    //   }
+    // }
+    // eslint-disable-next-line no-console
+
+    // const options = calculateType(response)
+
+    // this.$notify({
+    //   group: 'foo',
+    //   ...options
+    // })
+    //   return response
+    // })
+
+    this.$axios.onError((error) => {
+      // eslint-disable-next-line no-console
+      console.log('asffd', error)
+      this.$notify({
+        group: 'foo',
+        type: 'error',
+        title: 'Error',
+        text: error.message
+      })
+    })
+    this.$axios.onResponseError((error) => {
+      // eslint-disable-next-line no-console
+      console.log('asffd', error)
+      this.$notify({
+        group: 'foo',
+        type: 'error',
+        title: 'Error',
+        text: error
+      })
+    })
   }
 }
 </script>
 <style scoped>
 a {
   text-decoration: none;
+}
+.vue-notification {
+  padding: 10px;
+  margin: 30px;
 }
 </style>
