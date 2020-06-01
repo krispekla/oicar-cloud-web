@@ -10,12 +10,6 @@
           compare cloud providers and find one that matches your needs, save
           cloud configurations and much more.
         </v-card-subtitle>
-        <v-card-actions>
-          <v-spacer />
-          <!-- <v-btn color="primary" nuxt to="/inspire">
-            Continue
-          </v-btn> -->
-        </v-card-actions>
       </v-card>
     </v-flex>
     <v-flex xs12 sm8 md6>
@@ -25,7 +19,7 @@
         :key="index"
         :data="item"
         class="news-post"
-        @click="onNewsPostShow"
+        @click.stop="onNewsPostShow(index)"
       >
         <v-card max-width="800" class="mb-8 pa-3">
           <v-card-title class="headline mb-6 pt-3 mx-3">
@@ -34,37 +28,37 @@
           <v-card-subtitle class="mx-5">
             {{ item.content }}
           </v-card-subtitle>
-          <v-card-actions>
-            <v-spacer />
-          </v-card-actions>
         </v-card>
       </div>
     </v-flex>
+
+    <v-dialog v-model="dialog" max-width="800" class="p-12">
+      <v-card max-width="800" class="mb-8 pa-3">
+        <v-card-title class="headline mb-6 pt-3 mx-3">
+          {{ currentNewsPost.title }}
+        </v-card-title>
+        <v-card-subtitle class="mx-5">
+          {{ currentNewsPost.content }}
+        </v-card-subtitle>
+      </v-card>
+    </v-dialog>
   </v-layout>
 </template>
 
 <script>
-// import Logo from '~/components/Logo.vue'
-// import VuetifyLogo from '~/components/VuetifyLogo.vue'
-
 export default {
-  components: {
-    // Logo,
-    // VuetifyLogo
-  },
-  async asyncData({ $axios }) {
-    const newsPost = await $axios.$get(
-      'http://localhost:5005/api/CloudNews/getAll'
-    )
-    // this.newsPost = newsPost
-    return { newsPost }
+  async asyncData(ctx) {
+    return {
+      newsPost: await ctx.app.$cloudNewsRepository.getAll()
+    }
   },
   data() {
-    return { currentNewsPost: {} }
+    return { currentNewsPost: {}, dialog: false }
   },
   methods: {
-    onNewsPostShow(newsData) {
-      // prikazi news u modalu
+    onNewsPostShow(index) {
+      this.dialog = true
+      this.currentNewsPost = this.newsPost[index]
     }
   }
 }
