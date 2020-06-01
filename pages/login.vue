@@ -1,21 +1,26 @@
 <template>
   <v-row align="center" justify="center">
     <v-col cols="12" sm="8" md="4">
-      <v-card class="elevation-12">
+      <h2 class="font-weight-light mt-8 mb-3">Login</h2>
+      <v-card class="elevation-3">
         <v-card-text>
           <v-form>
             <v-text-field
               v-model="email"
-              label="Login"
+              label="E-mail"
+              :rules="[emailRules]"
               name="login"
               type="text"
             ></v-text-field>
             <v-text-field
               id="password"
               v-model="password"
+              :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="show ? 'text' : 'password'"
+              :rules="[required]"
               label="Password"
               name="password"
-              type="password"
+              @click:append="show = !show"
             ></v-text-field>
           </v-form>
         </v-card-text>
@@ -36,8 +41,14 @@ export default {
   },
   data() {
     return {
+      show: false,
       email: 'admin@test.com',
-      password: 'admin'
+      password: 'admin',
+      required: (value) => !!value || 'Required.',
+      emailRules: [
+        (v) => !!v || 'E-mail is required',
+        (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid'
+      ]
     }
   },
   methods: {
