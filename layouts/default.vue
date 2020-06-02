@@ -84,29 +84,7 @@ export default {
     }
   },
   created() {
-    // this.$axios.onResponse((response) => {
-    // function calculateType(response) {
-    //   switch (response.status) {
-    //     case 200:
-    //     case 201:
-    //     case 204:
-    //       return { type: 'success', title: 'Success' }
-    //     case 404:
-    //       return { type: 'warn', title: 'Warning', text: response.message }
-    //     default:
-    //       return { type: 'info', title: 'Info', text: response.message }
-    //   }
-    // }
-    // eslint-disable-next-line no-console
-
-    // const options = calculateType(response)
-
-    // this.$notify({
-    //   group: 'foo',
-    //   ...options
-    // })
-    //   return response
-    // })
+    this.$store.dispatch('localStorage/setAuthorization')
 
     this.$axios.onError((error) => {
       // eslint-disable-next-line no-console

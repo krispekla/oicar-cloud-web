@@ -26,6 +26,9 @@ export const actions = {
   },
   logout({ commit }) {
     commit('logout')
+  },
+  setAuthorization({ state }) {
+    this.$axios.setToken(state.token, 'Bearer')
   }
 }
 
