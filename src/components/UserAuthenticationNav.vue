@@ -4,7 +4,9 @@
     <a @click="onRegisterClick">Register</a>
   </div>
   <div v-else class="auth-nav mr-4">
-    <a @click="onLogout">Logout</a>
+    <a @click="onLogout"
+      ><span class="font-weight-bold mr-6">{{ getEmail }}</span> Logout</a
+    >
   </div>
 </template>
 
@@ -15,6 +17,11 @@ export default {
   computed: {
     isAuthenticated() {
       return this.$store.getters['account/isAuthenticated']
+    },
+    getEmail() {
+      const email = this.$store.getters['account/email']
+      if (email != null) return email
+      return ''
     },
   },
   methods: {

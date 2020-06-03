@@ -76,7 +76,6 @@ export default {
     lazy: false,
   }),
   methods: {
-    validate() {},
     reset() {
       this.$refs.form.reset()
     },

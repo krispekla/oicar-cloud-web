@@ -62,9 +62,7 @@ export default {
         })
 
         if (result.status === 200) {
-          // setAuthorizationHeader(result.data.token, 'Bearer')
-          console.log(result.data.token)
-          this.$store.commit('account/setRefreshToken', result.data.token)
+          this.$store.commit('account/setRefreshToken', result.data)
           setAuthorizationHeader(result.data.token)
           this.$router.push('/')
         }

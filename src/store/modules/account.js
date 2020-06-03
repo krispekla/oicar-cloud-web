@@ -7,6 +7,7 @@ const accountService = {}
 const state = {
   id: null,
   username: null,
+  email: null,
   expiresAt: null,
   token: null,
   accessToken: null,
@@ -15,6 +16,8 @@ const state = {
 }
 
 const getters = {
+  id: state => state.id,
+  email: state => state.email,
   token: state => state.token,
   accessToken: state => state.accessToken,
   refreshToken: state => state.refreshToken,
@@ -32,6 +35,7 @@ const mutations = {
   },
   clearAuthentication(state) {
     state.id = null
+    state.email = null
     state.username = null
     state.expiresAt = null
     state.token = null
@@ -47,9 +51,11 @@ const mutations = {
     state.lastRoute = null
   },
   setRefreshToken(state, data) {
-    state.token = data
-    state.accessToken = data
-    state.refreshToken = data
+    state.token = data.token
+    state.accessToken = data.token
+    state.refreshToken = data.token
+    state.id = data.id
+    state.email = data.email
   },
 }
 

@@ -8,6 +8,7 @@ import Registration from '../views/Registration.vue'
 import Calculator from '../views/Calculator.vue'
 import Configurations from '../views/Configurations.vue'
 import Forbidden from '../views/Forbidden.vue'
+import CalculatorResult from '../views/CalculatorResult.vue'
 
 Vue.use(VueRouter)
 
@@ -35,7 +36,7 @@ const routes = [
     name: 'calculator',
     component: Calculator,
     meta: {
-      requiresAuth: false,
+      requiresAuth: true,
     },
   },
   {
@@ -43,8 +44,17 @@ const routes = [
     name: 'configurations',
     component: Configurations,
     meta: {
-      requiresAuth: false,
+      requiresAuth: true,
     },
+  },
+  {
+    path: '/calculator/result',
+    name: 'calculator-result',
+    component: CalculatorResult,
+    meta: {
+      requiresAuth: true,
+    },
+    props: true,
   },
   {
     path: '/forbidden',

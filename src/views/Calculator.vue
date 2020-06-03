@@ -350,10 +350,10 @@ export default {
   },
   data() {
     return {
-      storageToggle: false,
-      functionToggle: false,
-      vmToggle: false,
-      sqlToggle: false,
+      storageToggle: true,
+      functionToggle: true,
+      vmToggle: true,
+      sqlToggle: true,
       resultData: {},
       operatingSystem: [
         {
@@ -366,33 +366,33 @@ export default {
         },
       ],
       cloudVM: {
-        instanceNb: 0,
+        instanceNb: 1,
         operatingSystem: 0,
-        core: 0,
-        ram: 0,
-        storage: 0,
+        core: 1,
+        ram: 1,
+        storage: 1,
         storageType: 0,
-        averageHoursPerDay: 0,
-        averageDaysPerWeek: 0,
+        averageHoursPerDay: 1,
+        averageDaysPerWeek: 1,
       },
       cloudStorage: {
-        totalAmount: 0,
-        readOperationsPerMonth: 0,
-        writeOperationsPerMonth: 0,
+        totalAmount: 1,
+        readOperationsPerMonth: 1,
+        writeOperationsPerMonth: 1,
       },
       cloudDbSQL: {
-        instance: 0,
-        ram: 0,
-        cpuCores: 0,
-        baskupSize: 0,
-        averageHoursPerDay: 0,
-        averageDaysPerWeek: 0,
-        sqlServerType: 0,
+        instance: 1,
+        ram: 1,
+        cpuCores: 1,
+        baskupSize: 1,
+        averageHoursPerDay: 1,
+        averageDaysPerWeek: 1,
+        sqlServerType: 1,
       },
       cloudFunction: {
-        executinPerRequestInMiliseconds: 0,
-        memorySizeInMB: 0,
-        executionsPerMonth: 0,
+        executinPerRequestInMiliseconds: 1,
+        memorySizeInMB: 1,
+        executionsPerMonth: 1,
       },
       CloudStorageRules: {
         totalAmount: [
@@ -405,25 +405,24 @@ export default {
   },
   methods: {
     async onCalculatorSubmit() {
-      this.dialog = !this.dialog
-      const userInput = {
-        cloudStorage: this.storageToggle ? this.cloudStorage : null,
-        cloudFunction: this.functionToggle ? this.cloudFunction : null,
-        cloudVm: this.vmToggle ? this.cloudVm : null,
-        cloudDbSQL: this.sqlToggle ? this.cloudDbSQL : null,
-      }
-
-      const result = await api.post('Calculator', userInput)
-
-      // eslint-disable-next-line no-console
-      console.log('trtr', result)
-      this.resultData = result
-      // this.$router.push({
-      //   path: '/result',
-      //   result,
-      // })
-
       // this.$refs.observer.validate()
+      try {
+        this.dialog = !this.dialog
+        const userInput = {
+          cloudStorage: this.storageToggle ? this.cloudStorage : null,
+          cloudFunction: this.functionToggle ? this.cloudFunction : null,
+          cloudVM: this.vmToggle ? this.cloudVM : null,
+          cloudDbSQL: this.sqlToggle ? this.cloudDbSQL : null,
+        }
+
+        const result = await api.post('Calculator', userInput)
+
+        if (result.status == 200) {
+          this.$router.push({ name: 'calculator-result', params: { result: result.data } })
+        }
+      } catch (e) {
+        this.$alert.error(e.message)
+      }
     },
   },
 }

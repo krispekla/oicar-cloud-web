@@ -1,5 +1,5 @@
 <template>
-  <v-layout column justify-center align-center>
+  <v-layout class="cloud-home-overview" column justify-center align-center>
     <v-flex xs12 sm8 md6>
       <v-card max-width="800" class="welcome-panel mt-6 elevation-8">
         <v-card-title class="headline text-center ">
@@ -41,6 +41,13 @@
         </v-card-subtitle>
       </v-card>
     </v-dialog>
+
+    <v-card max-width="440" class="cloud-home-calculator elevation-10" @click="goToCalculator">
+      <v-card-title class="white--text headline mb-6 pt-3 mx-3">
+        <v-icon class="white--text" large>mdi-calculator</v-icon>
+        Find cheapest cloud provider
+      </v-card-title>
+    </v-card>
   </v-layout>
 </template>
 
@@ -70,6 +77,9 @@ export default {
       this.dialog = true
       this.currentNewsPost = this.newsPost[index]
     },
+    goToCalculator() {
+      this.$router.push('calculator')
+    },
   },
 }
 </script>
@@ -94,5 +104,19 @@ export default {
 }
 .welcome-panel > .v-card__subtitle {
   color: white !important;
+}
+
+.cloud-home-overview {
+  position: relative;
+}
+.cloud-home-calculator {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 400px;
+  height: 120px;
+  border-radius: 5%;
+  font-size: 70px !important;
+  background: rgba(5, 147, 230, 0.986) !important;
 }
 </style>
