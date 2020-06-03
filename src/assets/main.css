@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+a:hover {
+  animation: text-focus-in 0.25s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  cursor: pointer !important;
+}
+
+ul li {
+  list-style: none;
+}
+
+.text-primary {
+  color: rgb(26, 24, 24) !important;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(26, 24, 24) !important;
+}
+.vue-notification {
+  padding: 10px;
+  margin: 30px;
+}
