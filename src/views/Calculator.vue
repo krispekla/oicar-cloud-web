@@ -18,7 +18,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="Total amount"
-              rules="numeric|required|min_value:1|min:1|max:5"
+              rules="numeric|required|max:5"
             >
               <v-col cols="5">
                 <v-text-field
@@ -32,7 +32,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="Read operations"
-              rules="numeric|required|min_value:1|min:1|max:5"
+              rules="numeric|required|max:5"
             >
               <v-col cols="5">
                 <v-text-field
@@ -46,7 +46,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="Write operations"
-              rules="numeric|required|min_value:1|min:1|max:5"
+              rules="numeric|required|max:5"
             >
               <v-col cols="5">
                 <v-text-field
@@ -72,7 +72,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="Memory size in MB"
-              rules="numeric|required|min_value:1|min:1|max:5"
+              rules="numeric|required|max:5"
             >
               <v-col cols="3">
                 <v-text-field
@@ -86,7 +86,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="Executions per request in miliseconds"
-              rules="numeric|required|min_value:1|min:1|max:5"
+              rules="numeric|required|max:5"
             >
               <v-col cols="3">
                 <v-text-field
@@ -100,7 +100,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="Executions per month"
-              rules="numeric|required|min_value:1|min:1|max:5"
+              rules="numeric|required|max:5"
             >
               <v-col cols="3">
                 <v-text-field
@@ -126,7 +126,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="Nb of instances"
-              rules="numeric|required|min_value:1|min:1|max:5"
+              rules="numeric|required|max:5"
             >
               <v-col cols="5">
                 <v-text-field
@@ -140,7 +140,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="Operating System"
-              rules="numeric|required|min_value:1|min:1|max:2"
+              rules="numeric|required|max:2"
             >
               <v-col cols="5">
                 <v-select
@@ -156,7 +156,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="Ram size"
-              rules="numeric|required|min_value:1|min:1|max:5"
+              rules="numeric|required|max:5"
             >
               <v-col cols="5">
                 <v-text-field
@@ -170,7 +170,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="Cores"
-              rules="numeric|required|min_value:1|min:1|max:2"
+              rules="numeric|required|max:2"
             >
               <v-col cols="5">
                 <v-text-field
@@ -184,7 +184,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="Storage"
-              rules="numeric|required|min_value:1|min:1|max:5"
+              rules="numeric|required|max:5"
             >
               <v-col cols="5">
                 <v-text-field
@@ -201,7 +201,6 @@
                 v-model="cloudVM.averageHoursPerDay"
                 label="Average Hours per day"
                 :thumb-size="24"
-                :error-messages="errors"
                 max="24"
                 min="1"
                 thumb-label="always"
@@ -213,7 +212,6 @@
                 v-model="cloudVM.averageDaysPerWeek"
                 label="Average Hours per day"
                 :thumb-size="24"
-                :error-messages="errors"
                 max="7"
                 min="1"
                 thumb-label="always"
@@ -234,11 +232,11 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="Instances"
-              rules="numeric|required|min_value:1|min:1|max:2"
+              rules="numeric|required|max:2"
             >
               <v-col cols="5">
                 <v-text-field
-                  v-model="cloudDbSQL.instanceNb"
+                  v-model="cloudDbSQL.instance"
                   label="Instances"
                   required
                   :error-messages="errors"
@@ -248,7 +246,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="Ram size"
-              rules="numeric|required|min_value:1|min:1|max:5"
+              rules="numeric|required|max:5"
             >
               <v-col cols="5">
                 <v-text-field
@@ -262,7 +260,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="Cores"
-              rules="numeric|required|min_value:1|min:1|max:2"
+              rules="numeric|required|max:2"
             >
               <v-col cols="5">
                 <v-text-field
@@ -276,7 +274,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="Backup size"
-              rules="numeric|required|min_value:1|min:1|max:5"
+              rules="numeric|required|max:5"
             >
               <v-col cols="5">
                 <v-text-field
@@ -293,7 +291,6 @@
                 v-model="cloudDbSQL.averageHoursPerDay"
                 label="Average Hours per day"
                 :thumb-size="24"
-                :error-messages="errors"
                 max="24"
                 min="1"
                 thumb-label="always"
@@ -305,7 +302,6 @@
                 v-model="cloudDbSQL.averageDaysPerWeek"
                 label="Average Days per week"
                 :thumb-size="24"
-                :error-messages="errors"
                 max="7"
                 min="1"
                 thumb-label="always"
@@ -350,10 +346,10 @@ export default {
   },
   data() {
     return {
-      storageToggle: true,
-      functionToggle: true,
-      vmToggle: true,
-      sqlToggle: true,
+      storageToggle: false,
+      functionToggle: false,
+      vmToggle: false,
+      sqlToggle: false,
       resultData: {},
       operatingSystem: [
         {
@@ -387,7 +383,7 @@ export default {
         baskupSize: 1,
         averageHoursPerDay: 1,
         averageDaysPerWeek: 1,
-        sqlServerType: 1,
+        sqlServerType: 0,
       },
       cloudFunction: {
         executinPerRequestInMiliseconds: 1,

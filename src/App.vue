@@ -81,6 +81,11 @@ export default {
           title: 'Configurations',
           to: '/configurations',
         },
+        {
+          icon: 'mdi-poll',
+          title: 'Suggestions',
+          to: '/suggestions',
+        },
       ],
       miniVariant: false,
       title: 'Oicar Cloud Calculator',

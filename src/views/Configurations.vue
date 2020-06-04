@@ -36,6 +36,7 @@
                   : '-'
               }}</span></span
             >
+              <v-btn class="ml-auto mt-2" color="success">Recalculate</v-btn>
             <h4 class="font-weight-medium pt-4 ml-auto mr-12">Results</h4>
           </div>
           <transition name="fade" mode="out-in">
@@ -53,7 +54,7 @@
 <script>
 import api from '../utils/baseApiService'
 import ResultItem from '../components/ResultItem'
-import { copy, isEmptyObject } from '../utils/helper'
+import { copy } from '../utils/helper'
 export default {
   name: 'Configurations',
   components: {
@@ -77,14 +78,14 @@ export default {
       this.userConfigurations.forEach(element => {
         let temp = copy(element)
         let totalPrice = 0
-        if (!isEmptyObject(element.cloudCombinationResult.cloudDbSQL))
-          totalPrice += element.cloudCombinationResult.cloudDbSQL.price
-        if (!isEmptyObject(element.cloudCombinationResult.cloudFunction))
-          totalPrice += element.cloudCombinationResult.cloudFunction.price
-        if (!isEmptyObject(element.cloudCombinationResult.cloudStorage))
-          totalPrice += element.cloudCombinationResult.cloudStorage.price
-        if (!isEmptyObject(element.cloudCombinationResult.cloudVM))
-          totalPrice += element.cloudCombinationResult.cloudVM.price
+        // if (!isEmptyObject(element.cloudCombinationResult.cloudDbSQL))
+        //   totalPrice += element.cloudCombinationResult.cloudDbSQL.price
+        // if (!isEmptyObject(element.cloudCombinationResult.cloudFunction))
+        //   totalPrice += element.cloudCombinationResult.cloudFunction.price
+        // if (!isEmptyObject(element.cloudCombinationResult.cloudStorage))
+        //   totalPrice += element.cloudCombinationResult.cloudStorage.price
+        // if (!isEmptyObject(element.cloudCombinationResult.cloudVM))
+        //   totalPrice += element.cloudCombinationResult.cloudVM.price
 
         temp.totalPrice = totalPrice
         computeConfig.push(temp)
@@ -100,9 +101,8 @@ export default {
   },
   data() {
     return {
-      currentlySelectedUserConfiguration: {},
+      currentlySelectedUserConfiguration: [],
       userConfigurations: [],
-      singleSelect: false,
       selected: [],
       headers: [
         {

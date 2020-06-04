@@ -8,6 +8,7 @@ import Registration from '../views/Registration.vue'
 import Calculator from '../views/Calculator.vue'
 import Configurations from '../views/Configurations.vue'
 import Forbidden from '../views/Forbidden.vue'
+import Suggestions from '../views/Suggestions.vue'
 import CalculatorResult from '../views/CalculatorResult.vue'
 
 Vue.use(VueRouter)
@@ -43,6 +44,14 @@ const routes = [
     path: '/configurations',
     name: 'configurations',
     component: Configurations,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/suggestions',
+    name: 'suggestions',
+    component: Suggestions,
     meta: {
       requiresAuth: true,
     },
