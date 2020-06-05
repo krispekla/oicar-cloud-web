@@ -1,6 +1,6 @@
 <template>
-  <v-layout class="cloud-home-overview" column justify-center align-center>
-    <v-flex xs12 sm8 md6>
+  <div class="cloud-home-overview">
+    <div class="cloud-home-content">
       <v-card max-width="800" class="welcome-panel mt-6 elevation-8">
         <v-card-title class="headline text-center ">
           Welcome to the Cloud calculator
@@ -10,8 +10,6 @@
           providers and find one that matches your needs, save cloud configurations and much more.
         </v-card-subtitle>
       </v-card>
-    </v-flex>
-    <v-flex xs12 sm8 md6>
       <h2 class="font-weight-light mt-12 mb-1">Cloud news</h2>
       <div
         v-for="(item, index) in newsPost"
@@ -20,35 +18,64 @@
         class="news-post"
         @click.stop="onNewsPostShow(index)"
       >
-        <v-card max-width="800" class="mb-8 pa-3">
+        <v-card max-width="800" class="mb-8 pa-3 elevation-12">
           <v-card-title class="headline mb-6 pt-3 mx-3">
             {{ item.title }}
           </v-card-title>
+          <v-img class="white--text align-end" height="350px" src="/covid-cloud.jpg"> </v-img>
+
           <v-card-subtitle class="mx-5">
             {{ item.content }}
           </v-card-subtitle>
         </v-card>
       </div>
-    </v-flex>
 
-    <v-dialog v-model="dialog" max-width="800" class="p-12">
-      <v-card max-width="800" class="mb-8 pa-3">
-        <v-card-title class="headline mb-6 pt-3 mx-3">
-          {{ currentNewsPost.title }}
-        </v-card-title>
-        <v-card-subtitle class="mx-5">
-          {{ currentNewsPost.content }}
-        </v-card-subtitle>
+      <v-dialog v-model="dialog" max-width="800" class="p-12">
+        <v-card max-width="800" class="pa-3">
+          <v-card-title class="headline mb-6 pt-3 mx-3">
+            {{ currentNewsPost.title }}
+          </v-card-title>
+          <v-img class="white--text align-end mb-6" height="350px" src="/covid-cloud.jpg">
+            <v-card-title class="headline mb-6 pt-3 mx-3">
+              {{ currentNewsPost.title }}
+            </v-card-title>
+          </v-img>
+          <v-card-subtitle class="mx-5">
+            {{ currentNewsPost.content }}
+          </v-card-subtitle>
+          <v-card-subtitle class="mx-5">
+            {{ currentNewsPost.content }}
+          </v-card-subtitle>
+          <v-card-subtitle class="mx-5">
+            {{ currentNewsPost.content }}
+          </v-card-subtitle>
+        </v-card>
+      </v-dialog>
+    </div>
+    <div class="cloud-home-sidebar">
+      <v-card max-width="540" class="cloud-home-calculator elevation-10" @click="goToCalculator">
+        <v-card-text class="white--text headline pt-10 pt-3 mx-3 justify-center">
+          <v-icon class="white--text" large>mdi-calculator</v-icon>
+          Find cheapest cloud provider
+        </v-card-text>
       </v-card>
-    </v-dialog>
-
-    <v-card max-width="440" class="cloud-home-calculator elevation-10" @click="goToCalculator">
-      <v-card-title class="white--text headline mb-6 pt-3 mx-3">
-        <v-icon class="white--text" large>mdi-calculator</v-icon>
-        Find cheapest cloud provider
-      </v-card-title>
-    </v-card>
-  </v-layout>
+      <v-card
+        max-width="540"
+        class="cloud-home-configuration mt-6 elevation-10"
+        @click="goToConfiguration"
+      >
+        <v-card-title class="white--text headline pt-10 pt-3 mx-3 justify-center">
+          <v-icon class="white--text mr-4" large>mdi-format-list-numbered-rtl</v-icon>
+          Calculate your prices
+        </v-card-title>
+      </v-card>
+      <v-card max-width="540" class="cloud-home-package mt-6 elevation-10" @click="goToSuggestion">
+        <v-card-title class="white--text headline pt-10 pt-3 mx-3 justify-center">
+          Find most used cloud packages
+        </v-card-title>
+      </v-card>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -80,6 +107,12 @@ export default {
     goToCalculator() {
       this.$router.push('calculator')
     },
+    goToConfiguration() {
+      this.$router.push('configuration')
+    },
+    goToSuggestion() {
+      this.$router.push('suggestions')
+    },
   },
 }
 </script>
@@ -107,16 +140,42 @@ export default {
 }
 
 .cloud-home-overview {
-  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 800px 1fr;
+  grid-template-areas: '. content sidebar';
 }
+.cloud-home-overview .v-dialog--active {
+  background: white !important;
+}
+.cloud-home-content {
+  grid-area: content;
+}
+
+.cloud-home-sidebar {
+  grid-area: sidebar;
+  padding: 30px;
+}
+
 .cloud-home-calculator {
-  position: absolute;
-  right: 0;
-  top: 0;
   width: 400px;
   height: 120px;
   border-radius: 5%;
   font-size: 70px !important;
   background: rgba(5, 147, 230, 0.986) !important;
+}
+
+.cloud-home-configuration {
+  width: 400px;
+  height: 120px;
+  border-radius: 5%;
+  font-size: 70px !important;
+  background: rgba(221, 64, 64, 0.986) !important;
+}
+.cloud-home-package {
+  width: 400px;
+  height: 120px;
+  border-radius: 5%;
+  font-size: 70px !important;
+  background: #ffd900 !important;
 }
 </style>
