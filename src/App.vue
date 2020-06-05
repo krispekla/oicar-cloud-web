@@ -33,7 +33,7 @@
       group="main"
       :max="8"
       animation-name="fade"
-      position="top right"
+      position="bottom right"
       classes="base-notification"
     />
     <v-content>
@@ -127,12 +127,12 @@ export default {
 
 /* Wrapper for Vue notifications plugin */
 .notifications {
-  bottom: 65px !important;
+  bottom: 35px !important;
   right: 15px !important;
   font-family: 'Work Sans', sans-serif;
 }
 .vue-notification-group {
-  top: 115px !important;
+  bottom: 55px !important;
   right: 15px !important;
 }
 
