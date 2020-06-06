@@ -153,11 +153,7 @@
                 ></v-select>
               </v-col>
             </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-              name="Ram size"
-              rules="numeric|required|max:5"
-            >
+            <ValidationProvider v-slot="{ errors }" name="Ram size" rules="numeric|required|max:5">
               <v-col cols="5">
                 <v-text-field
                   v-model="cloudVM.ram"
@@ -167,11 +163,7 @@
                 ></v-text-field>
               </v-col>
             </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-              name="Cores"
-              rules="numeric|required|max:2"
-            >
+            <ValidationProvider v-slot="{ errors }" name="Cores" rules="numeric|required|max:2">
               <v-col cols="5">
                 <v-text-field
                   v-model="cloudVM.core"
@@ -181,11 +173,7 @@
                 ></v-text-field>
               </v-col>
             </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-              name="Storage"
-              rules="numeric|required|max:5"
-            >
+            <ValidationProvider v-slot="{ errors }" name="Storage" rules="numeric|required|max:5">
               <v-col cols="5">
                 <v-text-field
                   v-model="cloudVM.storage"
@@ -229,11 +217,7 @@
             </template>
           </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <ValidationProvider
-              v-slot="{ errors }"
-              name="Instances"
-              rules="numeric|required|max:2"
-            >
+            <ValidationProvider v-slot="{ errors }" name="Instances" rules="numeric|required|max:2">
               <v-col cols="5">
                 <v-text-field
                   v-model="cloudDbSQL.instance"
@@ -243,11 +227,7 @@
                 ></v-text-field>
               </v-col>
             </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-              name="Ram size"
-              rules="numeric|required|max:5"
-            >
+            <ValidationProvider v-slot="{ errors }" name="Ram size" rules="numeric|required|max:5">
               <v-col cols="5">
                 <v-text-field
                   v-model="cloudDbSQL.ram"
@@ -257,11 +237,7 @@
                 ></v-text-field>
               </v-col>
             </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-              name="Cores"
-              rules="numeric|required|max:2"
-            >
+            <ValidationProvider v-slot="{ errors }" name="Cores" rules="numeric|required|max:2">
               <v-col cols="5">
                 <v-text-field
                   v-model="cloudDbSQL.cpuCores"

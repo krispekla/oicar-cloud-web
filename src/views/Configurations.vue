@@ -43,12 +43,11 @@
             <v-card>
               <v-card-title class="headline">Change name</v-card-title>
               <v-card-text>
-                <v-form ref="form" v-model="valid" :lazy-validation="lazy">
+                <v-form ref="form">
                   <v-text-field
                     v-model="changeName"
                     label="Name"
                     :rules="[rules.required]"
-                    :error-messages="errors"
                   ></v-text-field>
                 </v-form>
               </v-card-text>
@@ -84,7 +83,9 @@
               color="success"
               >Recalculate</v-btn
             >
-            <h4 class="font-weight-medium pt-4 ml-4 mr-3">Results</h4>
+            <h4 class="font-weight-medium pt-4 ml-4 mr-3"
+              >Results <span class="font-weight-light">{{ computeResultProvider }}</span></h4
+            >
           </div>
           <transition name="fade" mode="out-in">
             <ResultItem
@@ -140,7 +141,7 @@ export default {
               ? element.cloudCombinationResult.cloudVM.price
               : 0
         }
-        temp.totalPrice = totalPrice
+        temp.totalPrice = `${totalPrice} $`
         computeConfig.push(temp)
       })
       return computeConfig
@@ -163,9 +164,38 @@ export default {
           : '-'
         : '-'
     },
+    computeResultProvider() {
+      if (this.currentlySelectedUserConfiguration.length > 0) {
+        if (this.currentlySelectedUserConfiguration[0].cloudCombinationResult.cloudDbSQL != null)
+          return this.cloudProvider[
+            this.currentlySelectedUserConfiguration[0].cloudCombinationResult.cloudDbSQL
+              .cloudProvider
+          ]
+        else if (
+          this.currentlySelectedUserConfiguration[0].cloudCombinationResult.cloudStorage != null
+        )
+          return this.cloudProvider[
+            this.currentlySelectedUserConfiguration[0].cloudCombinationResult.cloudStorage
+              .cloudProvider
+          ]
+        else if (
+          this.currentlySelectedUserConfiguration[0].cloudCombinationResult.cloudFunction != null
+        )
+          return this.cloudProvider[
+            this.currentlySelectedUserConfiguration[0].cloudCombinationResult.cloudFunction
+              .cloudProvider
+          ]
+        else if (this.currentlySelectedUserConfiguration[0].cloudCombinationResult.cloudVM != null)
+          return this.cloudProvider[
+            this.currentlySelectedUserConfiguration[0].cloudCombinationResult.cloudVM.cloudProvider
+          ]
+        else return '-'
+      } else return '-'
+    },
   },
   data() {
     return {
+      cloudProvider: ['Amazon Web Services', 'Azure', 'Google Cloud'],
       changeName: '',
       showNew: false,
       cloudPriceIsValid: true,
