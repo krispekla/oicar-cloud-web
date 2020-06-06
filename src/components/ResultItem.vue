@@ -378,7 +378,7 @@ export default {
     currentResultData() {
       if (!this.hasNewData) return copy(this.result.cloudCombinationResult)
       else {
-        if (this.showOld) return copy(this.result.cloudCombinationResult)
+        if (!this.showOld) return copy(this.result.cloudCombinationResult)
         else return copy(this.updatedData)
       }
     },
